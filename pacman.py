@@ -41,7 +41,7 @@ TBL = CreateArray([
         [1,4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,1],
         [1,4,1,1,4,1,4,1,1,1,1,1,1,4,1,4,1,1,4,1],
         [1,5,4,4,4,1,4,4,4,4,4,4,4,4,1,4,4,4,5,1],
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] ]);
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] ])
 # attention, on utilise TBL[x][y], considérez que le (0,0) est en bas à gauche
 
 
@@ -282,8 +282,11 @@ score = 0
 
 def IncreaseScoreIfGum(x,y):
    global score
+   global poids
+
    if(TBL[x][y] == Map.PacGum):
       score += 100
+      poids[x][y] = M
    elif(TBL[x][y] == Map.Gum):
       score += 10
 
@@ -327,7 +330,10 @@ def IAPacman():
    global PacManPos, Ghosts
    #deplacement Pacman
    L = PacManPossibleMove()
-   choix = random.randrange(len(L))
+   choix = 0
+   for i in range(1,len(L)):
+      if poids[PacManPos[0]+L[i][0]][PacManPos[1]+L[i][1]] < poids[PacManPos[0]+L[choix][0]][PacManPos[1]+L[choix][1]]:
+         choix = i
    PacManPos[0] += L[choix][0]
    PacManPos[1] += L[choix][1]
    IncreaseScoreIfGum(PacManPos[0],PacManPos[1])
