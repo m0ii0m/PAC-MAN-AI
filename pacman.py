@@ -265,6 +265,15 @@ def Affiche(PacmanColor,message):
 #
 #########################################################################
 
+score = 0
+
+def IncreaseScoreIfGum(x,y):
+   global score
+   if(TBL[x][y] == Map.PacGum):
+      score += 100
+   elif(TBL[x][y] == Map.Gum):
+      score += 10
+
 def CanGo(x,y):
    return TBL[x,y] == Map.Gum or TBL[x,y] == Map.PacGum or TBL[x,y] == Map.Empty
    
@@ -292,6 +301,7 @@ def IAPacman():
    choix = random.randrange(len(L))
    PacManPos[0] += L[choix][0]
    PacManPos[1] += L[choix][1]
+   IncreaseScoreIfGum(PacManPos[0],PacManPos[1])
    TBL[PacManPos[0]][PacManPos[1]] = Map.Empty
    
    # juste pour montrer comment on se sert de la fonction SetInfo
@@ -324,7 +334,7 @@ def PlayOneTurn():
       if iteration % 2 == 0 :   IAPacman()
       else:                     IAGhosts()
    
-   Affiche(PacmanColor = "yellow", message = "message")  
+   Affiche(PacmanColor = "yellow", message = score)  
  
  
 ###########################################:
