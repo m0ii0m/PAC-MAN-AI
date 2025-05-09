@@ -318,10 +318,10 @@ def IAPacman():
    IncreaseScoreIfGum(PacManPos[0],PacManPos[1])
    TBL[PacManPos[0]][PacManPos[1]] = Map.Empty
    
-   # juste pour montrer comment on se sert de la fonction SetInfo
-   for x in range(LARGEUR):
-      for y in range(HAUTEUR):
-         SetInfo(1,x,y,x+y)
+   # affichage des poids
+   for x in range(poids.shape[0]):
+      for y in range(poids.shape[1]):
+         SetInfo(1,x,y,poids[x][y])
    
  
    
