@@ -274,7 +274,7 @@ def PacManPossibleMove():
    if CanGo(x,y-1)    : L.append(( 0,-1))
    if CanGo(x,y+1)    : L.append(( 0, 1))
    if CanGo(x+1,y)    : L.append(( 1, 0))
-   if CanGo(x-1,y-1)  : L.append((-1, 0))
+   if CanGo(x-1,y)    : L.append((-1, 0))
    return L
    
 def GhostsPossibleMove(x,y):
