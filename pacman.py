@@ -292,6 +292,7 @@ def IAPacman():
    choix = random.randrange(len(L))
    PacManPos[0] += L[choix][0]
    PacManPos[1] += L[choix][1]
+   TBL[PacManPos[0]][PacManPos[1]] = Map.Empty
    
    # juste pour montrer comment on se sert de la fonction SetInfo
    for x in range(LARGEUR):
