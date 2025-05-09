@@ -45,12 +45,16 @@ TBL = CreateArray([
 # attention, on utilise TBL[x][y], considérez que le (0,0) est en bas à gauche
 
 
+HAUTEUR = TBL.shape [1]
+LARGEUR = TBL.shape [0]
+
+
 G = 1000
 M = 100
 # tableau de poids pour les cases
 poids = np.zeros_like(TBL)
-for x in range(poids.shape[0]):
-   for y in range(poids.shape[1]):
+for x in range(LARGEUR):
+   for y in range(HAUTEUR):
       if TBL[x][y] == Map.Wall:
          poids[x][y] = G
       elif TBL[x][y] == Map.PacGum:
@@ -58,12 +62,7 @@ for x in range(poids.shape[0]):
       else:
          poids[x][y] = M
 
-     
-HAUTEUR = TBL.shape [1]
-LARGEUR = TBL.shape [0]
 
-
- 
 
 PacManPos = [5,5]
 
