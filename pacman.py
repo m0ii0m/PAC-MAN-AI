@@ -288,19 +288,21 @@ def IncreaseScoreIfGum(x,y):
    elif(TBL[x][y] == Map.Gum):
       score += 10
 
-def Bellman_Ford(poids):
-   NotStop = True
-   while(NotStop):
-      NotStop = False
+def Bellman_Ford():
+   global poids
+
+   for _ in range(LARGEUR * HAUTEUR - 1):
+      anyChange = False
       for x in range(poids.shape[0]):
          for y in range(poids.shape[1]):
-            if poids[x][y] == Map.Wall:
+            if TBL[x][y] == Map.Wall:
                continue
             for dx,dy in [(-1,0),(1,0),(0,-1),(0,1)]:
                if poids[x+dx][y+dy] < poids[x][y]:
-                  NotStop = True
-                  poids[x][y] = poids[x+dx][y+dy] + 1
-   return poids
+                     anyChange = True
+                     poids[x][y] = poids[x+dx][y+dy] + 1
+      if anyChange is False:
+        break
 
 def CanGo(x,y):
    return TBL[x,y] == Map.Gum or TBL[x,y] == Map.PacGum or TBL[x,y] == Map.Empty
@@ -356,8 +358,9 @@ def IAGhosts():
 iteration = 0
 def PlayOneTurn():
    global iteration
-   
+
    if not PAUSE_FLAG : 
+      Bellman_Ford()
       iteration += 1
       if iteration % 2 == 0 :   IAPacman()
       else:                     IAGhosts()
